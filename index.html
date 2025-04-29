@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Text Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+            background-color: yellow;
+            min-height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dynamic Text Generator</h1>
+    <p>Enter some text and customize its appearance below:</p>
+    
+    <div class="container">
+        <div class="form-group">
+            <label for="text-input">Enter Your Text:</label>
+            <input type="text" id="text-input" placeholder="Type your text here">
+        </div>
+        
+        <div class="form-group">
+            <label for="font-size">Font Size:</label>
+            <select id="font-size">
+                <option value="16px">Small</option>
+                <option value="20px" selected>Medium</option>
+                <option value="24px">Large</option>
+                <option value="32px">Extra Large</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="text-color">Text Color:</label>
+            <select id="text-color">
+                <option value="black">Black</option>
+                <option value="red">Red</option>
+                <option value="blue">Blue</option>
+                <option value="green">Green</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="bg-color">Background Color:</label>
+            <input type="text" id="bg-color" placeholder="Enter color name or hex code" value="yellow">
+        </div>
+        
+        <button id="generate-btn">Generate</button>
+    </div>
+    
+    <div id="output" class="output">Your text will appear here</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const textInput = document.getElementById('text-input');
+            const fontSize = document.getElementById('font-size');
+            const textColor = document.getElementById('text-color');
+            const bgColor = document.getElementById('bg-color');
+            const generateBtn = document.getElementById('generate-btn');
+            const output = document.getElementById('output');
+
+            // Update output when Generate button is clicked
+            generateBtn.addEventListener('click', updateOutput);
+
+            // Also update when any input changes (optional)
+            textInput.addEventListener('input', updateOutput);
+            fontSize.addEventListener('change', updateOutput);
+            textColor.addEventListener('change', updateOutput);
+            bgColor.addEventListener('input', updateOutput);
+
+            function updateOutput() {
+                // Get user inputs
+                const text = textInput.value || 'Your text will appear here';
+                const size = fontSize.value;
+                const color = textColor.value;
+                const bg = bgColor.value;
+
+                // Apply styles to output
+                output.textContent = text;
+                output.style.fontSize = size;
+                output.style.color = color;
+                output.style.backgroundColor = bg;
+            }
+
+            // Initialize with default values
+            updateOutput();
+        });
+    </script>
+</body>
+</html>
